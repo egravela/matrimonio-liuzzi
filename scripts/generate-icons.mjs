@@ -1,7 +1,7 @@
 // Genera le icone PWA: monogramma "E&T" in Great Vibes (lo stesso corsivo
-// calligrafico degli inviti) su fondo rosa cipria. Il testo viene convertito
-// in tracciati vettoriali con opentype.js, così sharp non dipende dai font
-// installati nel sistema.
+// calligrafico degli inviti) bianco su fondo rosa acceso, per un contrasto
+// netto. Il testo viene convertito in tracciati vettoriali con opentype.js,
+// così sharp non dipende dai font installati nel sistema.
 import sharp from 'sharp';
 import { mkdir, readFile } from 'node:fs/promises';
 import opentype from 'opentype.js';
@@ -9,8 +9,7 @@ import opentype from 'opentype.js';
 const ttf = await readFile('scripts/assets/GreatVibes-Regular.ttf');
 const font = opentype.parse(ttf.buffer.slice(ttf.byteOffset, ttf.byteOffset + ttf.byteLength));
 
-const SAGE = '#7c8760';
-const ROSE = '#d99aa6';
+const WHITE = '#ffffff';
 
 // Compone "E & T" glifo per glifo (charToGlyph, senza il motore GSUB di
 // opentype.js che non supporta alcune feature di Great Vibes).
@@ -67,9 +66,8 @@ function monogram(pad = 0) {
   const tx = 256 - (minX + maxX) / 2;
   const ty = 256 - pad * 0.25 - (minY + maxY) / 2;
 
-  const fills = [SAGE, ROSE, SAGE]; // E, &, T
   const glyphs = paths
-    .map((p, i) => `<path d="${p.toPathData(2)}" fill="${fills[i] ?? SAGE}" fill-rule="evenodd"/>`)
+    .map((p) => `<path d="${p.toPathData(2)}" fill="${WHITE}" fill-rule="evenodd"/>`)
     .join('\n    ');
 
   return { glyphs, tx, ty };
@@ -81,8 +79,8 @@ const svg = (pad = 0) => {
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="disc" cx="50%" cy="42%" r="85%">
-      <stop offset="0%" stop-color="#fbeef0"/>
-      <stop offset="100%" stop-color="#f0d2d8"/>
+      <stop offset="0%" stop-color="#b8637a"/>
+      <stop offset="100%" stop-color="#96435f"/>
     </radialGradient>
   </defs>
 
