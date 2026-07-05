@@ -5,62 +5,17 @@
 import sharp from 'sharp';
 import { mkdir, readFile } from 'node:fs/promises';
 import opentype from 'opentype.js';
+import { scaledMonogram } from './lib/monogram.mjs';
 
 const ttf = await readFile('scripts/assets/GreatVibes-Regular.ttf');
 const font = opentype.parse(ttf.buffer.slice(ttf.byteOffset, ttf.byteOffset + ttf.byteLength));
 
 const WHITE = '#ffffff';
 
-// Compone "E & T" glifo per glifo (charToGlyph, senza il motore GSUB di
-// opentype.js che non supporta alcune feature di Great Vibes).
-// Le maiuscole di Great Vibes hanno svolazzi molto ampi che si sovrappongono:
-// spaziatura extra e "&" ridotta come negli inviti.
-function textPaths(fontSize) {
-  const parts = [
-    { ch: 'E', size: fontSize },
-    { ch: '&', size: fontSize * 0.6, dy: -fontSize * 0.04 },
-    { ch: 'T', size: fontSize },
-  ];
-  const out = [];
-  let x = 0;
-  for (const part of parts) {
-    const glyph = font.charToGlyph(part.ch);
-    out.push(safeGlyphPath(glyph, x, part.dy ?? 0, part.size));
-    x += (glyph.advanceWidth / font.unitsPerEm) * part.size + fontSize * 0.12;
-  }
-  return out;
-}
-
-// opentype.js a certe dimensioni frazionarie produce coordinate NaN
-// (bug noto con alcuni glifi): se succede, ritocca la dimensione di un pelo
-function safeGlyphPath(glyph, x, y, size) {
-  for (let i = 0; i < 8; i++) {
-    const path = glyph.getPath(x, y, size + i * 0.037);
-    if (!/NaN|Infinity|undefined/i.test(path.toPathData(2))) return path;
-  }
-  throw new Error(`coordinate NaN persistenti nel glifo alla dimensione ${size}`);
-}
-
-function bbox(paths) {
-  const boxes = paths.map((p) => p.getBoundingBox());
-  return {
-    minX: Math.min(...boxes.map((b) => b.x1)),
-    maxX: Math.max(...boxes.map((b) => b.x2)),
-    minY: Math.min(...boxes.map((b) => b.y1)),
-    maxY: Math.max(...boxes.map((b) => b.y2)),
-  };
-}
-
 function monogram(pad = 0) {
-  // misura a dimensione di riferimento e scala per riempire l'icona
-  const ref = bbox(textPaths(100));
   const targetW = 380 - pad * 1.5;
   const targetH = 300 - pad * 1.1;
-  const fontSize =
-    100 * Math.min(targetW / (ref.maxX - ref.minX), targetH / (ref.maxY - ref.minY));
-
-  const paths = textPaths(fontSize);
-  const { minX, maxX, minY, maxY } = bbox(paths);
+  const { paths, minX, maxX, minY, maxY } = scaledMonogram(font, targetW, targetH);
 
   // centra orizzontalmente e verticalmente nell'icona
   const tx = 256 - (minX + maxX) / 2;

@@ -3,7 +3,16 @@ import { Cormorant_Garamond, Great_Vibes } from 'next/font/google';
 import InstallPrompt from '@/components/InstallPrompt';
 import RegisterSW from '@/components/RegisterSW';
 import TabBar from '@/components/TabBar';
+import { SPLASH_SCREENS } from '../scripts/lib/splash-sizes.mjs';
 import './globals.css';
+
+// iOS mostra una vera splash screen a schermo intero se gliene forniamo una
+// per ogni risoluzione; Android invece genera sempre e solo icona + colore
+// di sfondo del manifest, senza possibilità di personalizzazione.
+const startupImages = SPLASH_SCREENS.map(({ file, width, height, ratio }) => ({
+  url: `/splash/${file}`,
+  media: `(device-width: ${width}px) and (device-height: ${height}px) and (-webkit-device-pixel-ratio: ${ratio}) and (orientation: portrait)`,
+}));
 
 const greatVibes = Great_Vibes({
   weight: '400',
@@ -27,6 +36,7 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: 'default',
     title: 'Elena & Tommaso',
+    startupImage: startupImages,
   },
   icons: {
     apple: '/icons/apple-touch-icon.png',
