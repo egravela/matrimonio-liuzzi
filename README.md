@@ -11,6 +11,7 @@ Gli ospiti inquadrano il QR code sui tavoli, installano la web-app e condividono
 | `/carica` | Caricamento foto/video (nome ospite + dedica facoltativa) |
 | `/galleria` | Galleria a mosaico con lightbox e aggiornamento in tempo reale |
 | `/qr` | QR code del sito, da stampare per i cartoncini dei tavoli |
+| `/admin` | Area riservata (link discreto in fondo alla home): login con la sola email admin, gestione ed eliminazione delle foto |
 
 ## Setup
 

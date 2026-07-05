@@ -123,6 +123,14 @@ export default function GalleriaPage() {
           setItems((prev) => (prev.some((p) => p.id === row.id) ? prev : [row, ...prev]));
         },
       )
+      .on(
+        'postgres_changes',
+        { event: 'DELETE', schema: 'public', table: 'media' },
+        (payload) => {
+          const gone = payload.old as Partial<MediaRow>;
+          if (gone.id) setItems((prev) => prev.filter((p) => p.id !== gone.id));
+        },
+      )
       .subscribe();
 
     return () => {

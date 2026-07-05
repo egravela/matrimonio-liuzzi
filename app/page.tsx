@@ -54,6 +54,13 @@ export default function Home() {
             Sfoglia la galleria
           </Link>
         </div>
+
+        <Link href="/admin" aria-label="Area riservata" className="admin-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <rect x="5" y="10.5" width="14" height="10" rx="2" />
+            <path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3" />
+          </svg>
+        </Link>
       </div>
     </main>
   );
