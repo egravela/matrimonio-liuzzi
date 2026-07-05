@@ -5,14 +5,13 @@ import { mkdir } from 'node:fs/promises';
 const svg = (pad = 0) => `
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="disc" cx="50%" cy="42%" r="65%">
+    <radialGradient id="disc" cx="50%" cy="42%" r="85%">
       <stop offset="0%" stop-color="#fbeef0"/>
-      <stop offset="100%" stop-color="#f2d7dc"/>
+      <stop offset="100%" stop-color="#f0d2d8"/>
     </radialGradient>
   </defs>
 
-  <rect width="512" height="512" fill="#fefdfb"/>
-  <circle cx="256" cy="256" r="${206 - pad}" fill="url(#disc)"/>
+  <rect width="512" height="512" fill="url(#disc)"/>
 
   <text x="254" y="${300 - pad * 0.15}" text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif" font-style="italic"
