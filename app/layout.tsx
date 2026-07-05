@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Great_Vibes } from 'next/font/google';
+import InstallPrompt from '@/components/InstallPrompt';
 import RegisterSW from '@/components/RegisterSW';
 import TabBar from '@/components/TabBar';
 import './globals.css';
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <TabBar />
+        <InstallPrompt />
         <RegisterSW />
       </body>
     </html>

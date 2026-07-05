@@ -548,6 +548,64 @@ button {
   z-index: 1;
 }
 
+/* ---------- banner installazione PWA ---------- */
+
+.install-banner {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(84px + env(safe-area-inset-bottom));
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: min(94vw, 560px);
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff 60%, var(--blush));
+  border: 1px solid var(--rose);
+  box-shadow: 0 12px 32px rgba(87, 84, 79, 0.18);
+  animation: rise 0.5s cubic-bezier(0.22, 0.8, 0.35, 1);
+}
+
+.install-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.install-text strong {
+  display: block;
+  font-family: var(--font-script);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--sage-dark);
+}
+
+.install-text em {
+  color: var(--ink);
+}
+
+.install-cta {
+  padding: 0.55rem 1.2rem;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.install-close {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 4px;
+}
+
 /* ---------- stato / avvisi ---------- */
 
 .notice {
