@@ -1,9 +1,0 @@
-Banner installazione: layout a righe separate, pulsante piu grande
-
-Prima icona, testo e pulsante Installa stavano tutti sulla stessa riga,
-schiacciando il pulsante. Ora: icona+titolo in alto, testo descrittivo
-sotto su una riga propria, pulsante Installa a tutta larghezza in fondo.
-Verificato sia il flusso Android (prompt nativo) sia quello iOS
-(istruzioni Condividi -> Aggiungi alla schermata Home).
-
-Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
