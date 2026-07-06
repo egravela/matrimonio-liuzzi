@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "icons": "node scripts/generate-icons.mjs",
-    "splash": "node scripts/generate-splash.mjs"
+    "splash": "node scripts/generate-splash.mjs",
+    "qr-card": "node scripts/generate-qr-card.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",
