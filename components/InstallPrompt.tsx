@@ -60,27 +60,33 @@ export default function InstallPrompt() {
 
   return (
     <div className="install-banner" role="dialog" aria-label="Installa la app">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" strokeWidth="1.5">
-        <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
-        <path d="M12 17.5h.01" strokeLinecap="round" strokeWidth="2.2" />
-        <path d="M12 7v6m0 0 2.4-2.4M12 13 9.6 10.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <button type="button" className="install-close" aria-label="Chiudi" onClick={dismiss}>
+        ×
+      </button>
 
-      <div className="install-text">
+      <div className="install-header">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" strokeWidth="1.5">
+          <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+          <path d="M12 17.5h.01" strokeLinecap="round" strokeWidth="2.2" />
+          <path d="M12 7v6m0 0 2.4-2.4M12 13 9.6 10.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
         <strong>Porta con te il nostro album</strong>
+      </div>
+
+      <p className="install-desc">
         {mode === 'ios' && iosHelp ? (
-          <span>
+          <>
             Tocca{' '}
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ verticalAlign: '-2px' }}>
               <path d="M12 14V4m0 0L8.5 7.5M12 4l3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M5 12v6.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V12" strokeLinecap="round" />
             </svg>{' '}
             <em>Condividi</em> e poi <em>«Aggiungi alla schermata Home»</em>
-          </span>
+          </>
         ) : (
-          <span>Installa la app sul telefono: la ritrovi subito, anche al ricevimento</span>
+          'Installa la app sul telefono: la ritrovi subito, anche al ricevimento'
         )}
-      </div>
+      </p>
 
       {mode === 'native' ? (
         <button type="button" className="btn install-cta" onClick={install}>
@@ -91,10 +97,6 @@ export default function InstallPrompt() {
           Installa
         </button>
       ) : null}
-
-      <button type="button" className="install-close" aria-label="Chiudi" onClick={dismiss}>
-        ×
-      </button>
     </div>
   );
 }
