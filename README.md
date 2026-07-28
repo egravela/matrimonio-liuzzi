@@ -8,10 +8,23 @@ Gli ospiti inquadrano il QR code sui tavoli, installano la web-app e condividono
 | Rotta | Descrizione |
 |---|---|
 | `/` | Home con i nomi degli sposi, data e pulsanti principali |
+| `/intolleranze` | Modulo intolleranze e preferenze alimentari, una scheda per persona (si compila anche per tutta la famiglia) |
 | `/carica` | Caricamento foto/video (nome ospite + dedica facoltativa) |
 | `/galleria` | Galleria a mosaico con lightbox e aggiornamento in tempo reale |
 | `/qr` | QR code del sito, da stampare per i cartoncini dei tavoli |
-| `/admin` | Area riservata (link discreto in fondo alla home): login con la sola email admin, gestione ed eliminazione delle foto |
+| `/admin` | Area riservata (link discreto in fondo alla home): login con la sola email admin, gestione delle foto e risposte del modulo intolleranze con export CSV |
+
+## Modulo intolleranze
+
+Pensato per la fase che precede il matrimonio: l'app si manda in anticipo agli invitati
+e ognuno segnala per sé e per chi viene con lui. Dettagli:
+
+- una riga per persona nella tabella `diet_entries`; le persone inviate insieme condividono `submission_id`
+- reinviando il modulo dallo stesso dispositivo la nuova risposta **sostituisce** la precedente
+  (`replaces_submission_id`): gli anonimi non possono modificare né cancellare
+- le risposte sono leggibili solo dall'email admin (contengono allergie e contatti);
+  in `/admin` → *A tavola* ci sono il riepilogo per il catering e l'export CSV
+- la scadenza mostrata agli ospiti è la costante `DEADLINE` in [lib/diet.ts](lib/diet.ts)
 
 ## Setup
 
@@ -29,6 +42,12 @@ Gli ospiti inquadrano il QR code sui tavoli, installano la web-app e condividono
    - tabella `public.media` con RLS (lettura e inserimento pubblici, niente modifica/cancellazione)
    - bucket storage pubblico `wedding-media` (limite 200 MB/file, solo immagini e video)
    - pubblicazione realtime sulla tabella `media`
+
+   Poi [002_admin.sql](supabase/migrations/002_admin.sql) (permessi di cancellazione admin) e
+   [003_intolleranze.sql](supabase/migrations/003_intolleranze.sql) (tabella `diet_entries`:
+   invio pubblico, lettura e cancellazione riservate all'admin).
+   Le migrazioni si applicano anche con
+   `SUPABASE_DB_PASSWORD=… node scripts/apply-migration.mjs supabase/migrations/003_intolleranze.sql`.
 4. **Icone PWA**: `npm run icons` (già generate in `public/icons/`)
 5. **Sviluppo**: `npm run dev` — **Produzione**: `npm run build && npm start`
 

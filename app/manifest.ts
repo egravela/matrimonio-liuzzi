@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Elena & Tommaso — Matrimonio',
     short_name: 'Elena & Tommaso',
     description:
-      'Condividi le tue foto e i tuoi video del matrimonio di Elena e Tommaso, 19 settembre 2026.',
+      'Matrimonio di Elena e Tommaso, 19 settembre 2026: intolleranze alimentari, foto e video della festa.',
     start_url: '/',
     display: 'standalone',
     // stesso tono dell'icona: su Android l'avvio mostra sempre icona +

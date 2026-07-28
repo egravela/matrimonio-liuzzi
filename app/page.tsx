@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Floral from '@/components/Floral';
+import { DEADLINE } from '@/lib/diet';
 
 export default function Home() {
   return (
@@ -38,6 +39,24 @@ export default function Home() {
           </svg>
           Come arrivare
         </a>
+
+        <div className="divider" />
+
+        <div className="cta-card">
+          <p className="eyebrow">Prima del grande giorno</p>
+          <p className="script" style={{ fontSize: '2.1rem', margin: '0.3rem 0 0.5rem' }}>
+            Il vostro posto a tavola
+          </p>
+          <p style={{ fontSize: '1.02rem' }}>
+            Diteci se ci sono intolleranze, allergie o menù speciali: al resto pensiamo noi.
+          </p>
+          <Link href="/intolleranze" className="btn" style={{ marginTop: '1.1rem' }}>
+            Compila il modulo
+          </Link>
+          <p style={{ fontSize: '0.85rem', color: 'var(--ink-soft)', marginTop: '0.7rem' }}>
+            Bastano due minuti · vi chiediamo di farlo entro il {DEADLINE}
+          </p>
+        </div>
 
         <div className="divider" />
 

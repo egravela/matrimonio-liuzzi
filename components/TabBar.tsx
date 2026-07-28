@@ -15,6 +15,16 @@ const tabs = [
     ),
   },
   {
+    href: '/intolleranze',
+    label: 'A tavola',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <path d="M7 3v7.5a2 2 0 0 0 4 0V3M9 10.5V21" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16.5 21v-7m0 0c1.9 0 2.8-1.5 2.8-4.5 0-3-.9-6.5-2.8-6.5S13.7 6.5 13.7 9.5c0 3 .9 4.5 2.8 4.5z" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
     href: '/carica',
     label: 'Carica',
     icon: (

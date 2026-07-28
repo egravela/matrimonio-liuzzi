@@ -521,6 +521,21 @@ button {
   height: 22px;
 }
 
+/* quattro voci su schermi stretti */
+@media (max-width: 390px) {
+  .tabbar {
+    gap: 0.15rem;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+  }
+
+  .tabbar a {
+    padding: 0.45rem 0.15rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+  }
+}
+
 /* ---------- decorazioni floreali ---------- */
 
 .floral {
@@ -747,6 +762,148 @@ button {
   font-size: 1.4rem;
   line-height: 1;
   padding: 4px;
+}
+
+/* ---------- richiamo al modulo intolleranze ---------- */
+
+.cta-card {
+  background: linear-gradient(160deg, #fff 55%, var(--blush));
+  border: 1px solid var(--rose);
+  border-radius: 20px;
+  padding: 1.5rem 1.3rem 1.6rem;
+  box-shadow: 0 10px 30px rgba(87, 84, 79, 0.07);
+}
+
+/* ---------- modulo intolleranze ---------- */
+
+.person-card {
+  margin-bottom: 1.1rem;
+}
+
+.person-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+}
+
+.chip {
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink-soft);
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  line-height: 1.25;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--sage-soft);
+}
+
+.chip.on {
+  background: #eef3e4;
+  border-color: var(--sage-soft);
+  color: var(--sage-dark);
+}
+
+.chips.readonly .chip {
+  cursor: default;
+}
+
+.chip:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.link-btn {
+  border: none;
+  background: none;
+  padding: 0.2rem 0;
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  text-decoration: underline;
+}
+
+.link-btn.danger-link {
+  color: #b96a6a;
+}
+
+.link-btn.center-block {
+  display: block;
+  margin: 1rem auto 0;
+}
+
+.add-person {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+}
+
+.field-error {
+  margin-top: 0.6rem;
+  font-size: 0.88rem;
+  color: #a05252;
+}
+
+.recap-person + .recap-person {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.recap-person strong {
+  font-weight: 600;
+  font-style: italic;
+  color: var(--sage-dark);
+}
+
+.recap-notes {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- selettore sezioni admin ---------- */
+
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.seg button {
+  border: none;
+  background: none;
+  padding: 0.35rem 0.95rem;
+  border-radius: 999px;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.seg button.on {
+  background: var(--blush);
+  color: var(--sage-dark);
+}
+
+.diet-card {
+  margin-bottom: 1rem;
 }
 
 /* ---------- stato / avvisi ---------- */

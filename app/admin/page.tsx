@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import Floral from '@/components/Floral';
 import { BUCKET, publicUrl, supabase, type MediaRow } from '@/lib/supabase';
+import DietManager from './DietManager';
 
 const ADMIN_EMAIL = 'egravela@latraccia.it';
 
@@ -41,10 +42,42 @@ export default function AdminPage() {
             </button>
           </div>
         ) : (
-          <AdminManager onLogout={() => supabase.auth.signOut()} />
+          <AdminHome />
         )}
       </div>
     </main>
+  );
+}
+
+function AdminHome() {
+  const [tab, setTab] = useState<'media' | 'diet'>('media');
+
+  return (
+    <>
+      <div className="admin-bar" style={{ marginBottom: '0.4rem' }}>
+        <div className="seg">
+          <button
+            type="button"
+            className={tab === 'media' ? 'on' : ''}
+            onClick={() => setTab('media')}
+          >
+            Ricordi
+          </button>
+          <button
+            type="button"
+            className={tab === 'diet' ? 'on' : ''}
+            onClick={() => setTab('diet')}
+          >
+            A tavola
+          </button>
+        </div>
+        <button className="btn ghost admin-mini" onClick={() => supabase.auth.signOut()}>
+          Esci
+        </button>
+      </div>
+
+      {tab === 'media' ? <AdminManager /> : <DietManager />}
+    </>
   );
 }
 
@@ -102,7 +135,7 @@ function AdminLogin() {
   );
 }
 
-function AdminManager({ onLogout }: { onLogout: () => void }) {
+function AdminManager() {
   const [items, setItems] = useState<MediaRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -186,9 +219,6 @@ function AdminManager({ onLogout }: { onLogout: () => void }) {
             disabled={busy || items.length === 0}
           >
             {selected.size === items.length && items.length > 0 ? 'Deseleziona' : 'Seleziona tutto'}
-          </button>
-          <button className="btn ghost admin-mini" onClick={onLogout} disabled={busy}>
-            Esci
           </button>
         </div>
       </div>
