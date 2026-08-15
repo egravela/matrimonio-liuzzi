@@ -30,6 +30,8 @@ export const RESTRICTIONS: { key: string; label: string }[] = [
   { key: 'uova', label: 'Uova' },
   { key: 'soia', label: 'Soia' },
   { key: 'bambini', label: 'Menù bambini' },
+  { key: 'seggiolone', label: 'Seggiolone' },
+  { key: 'gravidanza', label: 'In gravidanza' },
   { key: 'altro', label: 'Altro (dettagli sotto)' },
 ];
 

@@ -45,7 +45,9 @@ e ognuno segnala per sé e per chi viene con lui. Dettagli:
 
    Poi [002_admin.sql](supabase/migrations/002_admin.sql) (permessi di cancellazione admin) e
    [003_intolleranze.sql](supabase/migrations/003_intolleranze.sql) (tabella `diet_entries`:
-   invio pubblico, lettura e cancellazione riservate all'admin).
+   invio pubblico, lettura e cancellazione riservate all'admin) e
+   [004_intolleranze_opzioni.sql](supabase/migrations/004_intolleranze_opzioni.sql)
+   (alza il tetto di voci selezionabili per riga).
    Le migrazioni si applicano anche con
    `SUPABASE_DB_PASSWORD=… node scripts/apply-migration.mjs supabase/migrations/003_intolleranze.sql`.
 4. **Icone PWA**: `npm run icons` (già generate in `public/icons/`)
