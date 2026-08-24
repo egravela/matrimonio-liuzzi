@@ -1,4 +1,4 @@
-import { publicUrl, type MediaRow } from './supabase';
+import { isLocalAsset, publicUrl, type MediaRow } from './supabase';
 
 function fileName(item: MediaRow) {
   const ext = item.storage_path.split('.').pop() ?? 'jpg';
@@ -62,7 +62,9 @@ function legacyCopy(text: string): boolean {
   return ok;
 }
 
-// Il parametro ?download= fa servire il file da Supabase come allegato
+// Il parametro ?download= fa servire il file da Supabase come allegato. Sui file
+// del sito non serve: stessa origine, se ne occupa l'attributo download del link.
 export function downloadUrl(item: MediaRow) {
-  return `${publicUrl(item.storage_path)}?download=${fileName(item)}`;
+  const url = publicUrl(item.storage_path);
+  return isLocalAsset(item.storage_path) ? url : `${url}?download=${fileName(item)}`;
 }

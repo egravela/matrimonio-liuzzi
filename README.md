@@ -58,6 +58,23 @@ e ognuno segnala per sé e per chi viene con lui. Dettagli:
 Pensata per Vercel: importare la cartella, impostare le due variabili d'ambiente e pubblicare.
 Il QR in `/qr` usa automaticamente il dominio di produzione.
 
+## Foto degli sposi in galleria
+
+Chi apre il sito prima del matrimonio trova già qualcosa da guardare: le foto di Elena e Tommaso
+stanno in [public/foto-sposi/](public/foto-sposi) e sono servite dal sito, non dal bucket. In
+`media` hanno un `storage_path` assoluto (`/foto-sposi/…`): `publicUrl()` riconosce la barra
+iniziale e lo usa così com'è invece di comporre l'URL dello storage.
+
+Per questo la galleria si popola con delle semplici insert, senza caricare file:
+[supabase/migrations/005_foto_sposi.sql](supabase/migrations/005_foto_sposi.sql) toglie i
+segnaposto di sviluppo (path `demo-*`, creati da `scripts/seed-demo.mjs`) e inserisce le quindici
+foto. Si incolla nell'SQL Editor di Supabase — comodo anche dal telefono — e si può rilanciare
+quante volte si vuole. **Prima** va pubblicata la versione del sito che contiene le immagini,
+**poi** si lancia lo script: al contrario la galleria mostrerebbe riquadri rotti.
+
+Ordine e didascalie si cambiano nell'elenco dentro quel file. Per togliere le foto in seguito basta
+l'area `/admin`, scheda **Media**: la riga sparisce dalla galleria e il file resta nel sito.
+
 ## Grafica coordinata
 
 Palette e tipografia riprendono gli inviti: corsivo calligrafico (Great Vibes) verde salvia,
