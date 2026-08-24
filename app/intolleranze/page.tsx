@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Floral from '@/components/Floral';
-import { DEADLINE, NONE, RESTRICTIONS, labelFor } from '@/lib/diet';
+import { DEADLINE, DIET_TAGS, NEED_TAGS, NONE, isNeedTag, labelFor } from '@/lib/diet';
 import { supabase } from '@/lib/supabase';
 
 const STORAGE_KEY = 'diet_submission';
@@ -71,10 +71,18 @@ export default function IntolleranzePage() {
     setPeople((prev) =>
       prev.map((p) => {
         if (p.key !== key) return p;
+        // «Nessuna intolleranza» azzera solo la dieta: seggiolone e gravidanza
+        // non sono intolleranze e restano selezionati.
+        const needs = p.restrictions.filter(isNeedTag);
         if (tag === NONE) {
-          return { ...p, restrictions: p.restrictions.includes(NONE) ? [] : [NONE] };
+          return {
+            ...p,
+            restrictions: p.restrictions.includes(NONE) ? needs : [NONE, ...needs],
+          };
         }
-        const without = p.restrictions.filter((r) => r !== NONE);
+        const without = isNeedTag(tag)
+          ? p.restrictions
+          : p.restrictions.filter((r) => r !== NONE);
         return {
           ...p,
           restrictions: without.includes(tag)
@@ -88,7 +96,7 @@ export default function IntolleranzePage() {
   const filled = people.map((p) => ({
     ...p,
     hasName: p.name.trim().length > 0,
-    hasAnswer: p.restrictions.length > 0 || p.notes.trim().length > 0,
+    hasAnswer: p.restrictions.some((r) => !isNeedTag(r)) || p.notes.trim().length > 0,
   }));
   const valid = filled.every((p) => p.hasName && p.hasAnswer);
 
@@ -198,7 +206,23 @@ export default function IntolleranzePage() {
 
                 <span className="eyebrow">Intolleranze e preferenze</span>
                 <div className="chips">
-                  {RESTRICTIONS.map((r) => (
+                  {DIET_TAGS.map((r) => (
+                    <button
+                      type="button"
+                      key={r.key}
+                      className={`chip${p.restrictions.includes(r.key) ? ' on' : ''}`}
+                      aria-pressed={p.restrictions.includes(r.key)}
+                      onClick={() => toggleTag(p.key, r.key)}
+                      disabled={sending}
+                    >
+                      {r.label}
+                    </button>
+                  ))}
+                </div>
+
+                <span className="eyebrow chips-group">Serve qualcosa al tavolo?</span>
+                <div className="chips">
+                  {NEED_TAGS.map((r) => (
                     <button
                       type="button"
                       key={r.key}
