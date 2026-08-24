@@ -41,6 +41,7 @@ export const RESTRICTIONS: { key: string; label: string; kind: RestrictionKind }
   { key: 'altro', label: 'Altro (dettagli sotto)', kind: 'dieta' },
   { key: 'seggiolone', label: 'Seggiolone', kind: 'esigenza' },
   { key: 'gravidanza', label: 'In gravidanza', kind: 'esigenza' },
+  { key: 'passeggino', label: 'Posto per passeggino', kind: 'esigenza' },
 ];
 
 export const DIET_TAGS = RESTRICTIONS.filter((r) => r.kind === 'dieta');
