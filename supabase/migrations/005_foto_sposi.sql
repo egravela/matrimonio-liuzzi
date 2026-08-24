@@ -52,10 +52,26 @@ from (values
   (12, '/foto-sposi/12-un-tuffo.jpg',            'Un tuffo insieme'),
   (13, '/foto-sposi/13-feste-in-famiglia.jpg',   'Feste in famiglia'),
   (14, '/foto-sposi/14-freddo-ma-felici.jpg',    'Freddo, ma felici'),
-  (15, '/foto-sposi/15-domenica-in-balcone.jpg', 'Domenica in balcone')
+  (15, '/foto-sposi/15-domenica-in-balcone.jpg', 'Domenica in balcone'),
+  (16, '/foto-sposi/16-festa-anni-ottanta.jpg',        'Festa anni Ottanta'),
+  (17, '/foto-sposi/17-trentacinque-candeline.jpg',    'Trentacinque candeline'),
+  (18, '/foto-sposi/18-neve-e-sole.jpg',               'Neve e sole'),
+  (19, '/foto-sposi/19-la-laurea-di-lui.jpg',          'Dottore!'),
+  (20, '/foto-sposi/20-passeggiata-nel-bosco.jpg',     'Passeggiata nel bosco'),
+  (21, '/foto-sposi/21-picnic-in-vigna.jpg',           'Picnic in vigna'),
+  (22, '/foto-sposi/22-un-pomeriggio-insieme.jpg',     'Un pomeriggio insieme'),
+  (23, '/foto-sposi/23-da-invitati.jpg',               'Da invitati, per una volta'),
+  (24, '/foto-sposi/24-un-altro-si-da-festeggiare.jpg','Un altro sì da festeggiare'),
+  (25, '/foto-sposi/25-sotto-i-pini-di-sera.jpg',      'Sotto i pini, di sera'),
+  (26, '/foto-sposi/26-sotto-le-luci.jpg',             'Sotto le luci'),
+  (27, '/foto-sposi/27-attenta-con-quel-coltello.jpg', 'Attenta con quel coltello'),
+  (28, '/foto-sposi/28-riso-e-coriandoli.jpg',         'Riso e coriandoli'),
+  (29, '/foto-sposi/29-un-bacio-al-volo.jpg',          'Un bacio al volo'),
+  (30, '/foto-sposi/30-sera-destate-al-mare.jpg',      'Sera d''estate al mare'),
+  (31, '/foto-sposi/31-tramonto.jpg',                  'Tramonto')
 ) as f(ord, path, caption);
 
 commit;
 
--- Controllo: dovrebbe restituire 15 righe, nessuna "demo-".
+-- Controllo: dovrebbe restituire 31 righe, nessuna "demo-".
 -- select storage_path, caption, created_at from public.media order by created_at desc;
