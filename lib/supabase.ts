@@ -16,6 +16,15 @@ export type MediaRow = {
   media_type: 'image' | 'video';
 };
 
+/**
+ * Le foto degli sposi non stanno nel bucket: sono file del sito (public/foto-sposi/)
+ * e in `media` hanno un path assoluto. Si riconoscono dalla barra iniziale.
+ */
+export function isLocalAsset(path: string) {
+  return path.startsWith('/');
+}
+
 export function publicUrl(path: string) {
+  if (isLocalAsset(path)) return path;
   return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }

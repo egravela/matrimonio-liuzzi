@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import Floral from '@/components/Floral';
-import { BUCKET, publicUrl, supabase, type MediaRow } from '@/lib/supabase';
+import { BUCKET, isLocalAsset, publicUrl, supabase, type MediaRow } from '@/lib/supabase';
 import DietManager from './DietManager';
 
 const ADMIN_EMAIL = 'egravela@latraccia.it';
@@ -184,8 +184,11 @@ function AdminManager() {
         errors.push(dbErr.message);
         continue;
       }
-      const { error: stErr } = await supabase.storage.from(BUCKET).remove([item.storage_path]);
-      if (stErr) errors.push(`file ${item.storage_path}: ${stErr.message}`);
+      // i file del sito non stanno nel bucket: resta solo la riga da togliere
+      if (!isLocalAsset(item.storage_path)) {
+        const { error: stErr } = await supabase.storage.from(BUCKET).remove([item.storage_path]);
+        if (stErr) errors.push(`file ${item.storage_path}: ${stErr.message}`);
+      }
       removed += 1;
       setItems((prev) => prev.filter((p) => p.id !== item.id));
     }
