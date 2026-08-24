@@ -18,10 +18,10 @@ begin;
 delete from public.media where storage_path like 'demo-%';
 
 -- I file veri e propri restano nel bucket ma non li vede più nessuno: la
--- galleria e l'area admin leggono da public.media. Questa riga li toglie anche
--- dall'elenco dello storage; se dovesse dare errore di permessi, si può
--- saltare senza conseguenze per il sito.
-delete from storage.objects where bucket_id = 'wedding-media' and name like 'demo-%';
+-- galleria e l'area admin leggono da public.media. Toglierli anche dallo
+-- storage non si può da qui: un trigger di Supabase (storage.protect_delete)
+-- vieta la cancellazione diretta da storage.objects e impone la Storage API.
+-- Per ripulire anche il bucket serve la dashboard, sezione Storage.
 
 -- 2. le foto degli sposi (rilanciabile: prima cancella, poi reinserisce)
 delete from public.media where storage_path like '/foto-sposi/%';
