@@ -67,9 +67,9 @@ iniziale e lo usa così com'è invece di comporre l'URL dello storage.
 
 Per questo la galleria si popola con delle semplici insert, senza caricare file:
 [supabase/migrations/005_foto_sposi.sql](supabase/migrations/005_foto_sposi.sql) toglie i
-segnaposto di sviluppo (path `demo-*`, creati da `scripts/seed-demo.mjs`) e inserisce le quindici
-foto. Si incolla nell'SQL Editor di Supabase — comodo anche dal telefono — e si può rilanciare
-quante volte si vuole. **Prima** va pubblicata la versione del sito che contiene le immagini,
+segnaposto di sviluppo (path `demo-*`, creati da `scripts/seed-demo.mjs`) e inserisce le foto. Si
+incolla nell'SQL Editor di Supabase — comodo anche dal telefono — e si può rilanciare quante volte
+si vuole. **Prima** va pubblicata la versione del sito che contiene le immagini,
 **poi** si lancia lo script: al contrario la galleria mostrerebbe riquadri rotti.
 
 Ordine e didascalie si cambiano nell'elenco dentro quel file. Per togliere le foto in seguito basta
