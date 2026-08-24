@@ -795,6 +795,13 @@ button {
   margin-top: 0.45rem;
 }
 
+/* Secondo gruppo di chip nella stessa scheda (le esigenze al tavolo):
+   l'eyebrow è inline, serve display block perché il margine faccia effetto. */
+.eyebrow.chips-group {
+  display: block;
+  margin-top: 1rem;
+}
+
 .chip {
   padding: 0.42rem 0.85rem;
   border-radius: 999px;
