@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Floral from '@/components/Floral';
+import { shrinkImage } from '@/lib/compress';
 import { BUCKET, supabase } from '@/lib/supabase';
 
 const MAX_FILE_MB = 200;
@@ -12,6 +13,7 @@ type Picked = { file: File; url: string; key: string };
 
 type Status =
   | { kind: 'idle' }
+  | { kind: 'preparing'; done: number; total: number }
   | { kind: 'uploading'; done: number; total: number }
   | { kind: 'ok'; count: number }
   | { kind: 'err'; message: string };
@@ -92,9 +94,18 @@ export default function CaricaPage() {
     const total = picked.length;
     let done = 0;
     const failed: string[] = [];
-    setStatus({ kind: 'uploading', done: 0, total });
 
-    const queue = [...picked];
+    // Prima si alleggeriscono le foto, una alla volta: tre immagini a piena
+    // risoluzione in memoria insieme sono troppe per un telefono. Il video e
+    // ciò che non si può ridurre passano di qui senza modifiche.
+    setStatus({ kind: 'preparing', done: 0, total });
+    const queue: Picked[] = [];
+    for (const item of picked) {
+      queue.push({ ...item, file: await shrinkImage(item.file) });
+      setStatus({ kind: 'preparing', done: queue.length, total });
+    }
+
+    setStatus({ kind: 'uploading', done: 0, total });
     const uploaded = new Set<string>();
 
     async function worker() {
@@ -150,7 +161,7 @@ export default function CaricaPage() {
     }
   }
 
-  const uploading = status.kind === 'uploading';
+  const uploading = status.kind === 'preparing' || status.kind === 'uploading';
 
   return (
     <main className="page">
@@ -207,6 +218,8 @@ export default function CaricaPage() {
                 <strong>Scegli una o più foto e video</strong>
                 <span style={{ fontSize: '0.9rem', color: 'var(--ink-soft)' }}>
                   tieni premuto per selezionarne tanti insieme · max {MAX_FILE_MB} MB a file
+                  <br />
+                  le foto vengono alleggerite in automatico, il caricamento è più veloce
                 </span>
               </>
             ) : (
@@ -254,13 +267,15 @@ export default function CaricaPage() {
             </div>
           )}
 
-          {status.kind === 'uploading' && (
+          {(status.kind === 'preparing' || status.kind === 'uploading') && (
             <div style={{ margin: '1rem 0' }}>
               <div className="progress">
                 <div style={{ width: `${(status.done / status.total) * 100}%` }} />
               </div>
               <p className="center" style={{ fontSize: '0.9rem', marginTop: '0.4rem' }}>
-                Caricati {status.done} di {status.total}…
+                {status.kind === 'preparing'
+                  ? `Preparo le foto: ${status.done} di ${status.total}…`
+                  : `Caricati ${status.done} di ${status.total}…`}
               </p>
             </div>
           )}
@@ -293,7 +308,7 @@ export default function CaricaPage() {
                 <svg className="spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
                   <path d="M12 3a9 9 0 1 0 9 9" strokeLinecap="round" />
                 </svg>
-                Caricamento…
+                {status.kind === 'preparing' ? 'Preparazione…' : 'Caricamento…'}
               </>
             ) : picked.length > 1 ? (
               `Carica ${picked.length} file`

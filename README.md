@@ -58,6 +58,18 @@ e ognuno segnala per sé e per chi viene con lui. Dettagli:
 Pensata per Vercel: importare la cartella, impostare le due variabili d'ambiente e pubblicare.
 Il QR in `/qr` usa automaticamente il dominio di produzione.
 
+## Caricamento alleggerito
+
+Le foto vengono ridotte nel browser dell'ospite prima di partire ([lib/compress.ts](lib/compress.ts)):
+lato lungo a 2000 px, JPEG all'82%. Una foto da telefono passa da qualche MB a poche centinaia di
+kB. Serve tanto a chi carica — in sala la rete è divisa fra tutti gli invitati — quanto a chi apre
+la galleria e altrimenti si riscaricherebbe gli originali a piena risoluzione.
+
+L'orientamento EXIF viene applicato durante il ridimensionamento, altrimenti le foto verticali
+uscirebbero coricate. Restano intatti i video, le GIF e i file già sotto gli 800 kB. Se la
+compressione fallisce per qualunque motivo si carica l'originale: non deve mai essere lei a
+impedire un caricamento.
+
 ## Foto degli sposi in galleria
 
 Chi apre il sito prima del matrimonio trova già qualcosa da guardare: le foto di Elena e Tommaso
