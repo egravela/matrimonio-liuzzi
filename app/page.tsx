@@ -28,7 +28,7 @@ export default function Home() {
         <p style={{ fontStyle: 'italic', color: 'var(--ink-soft)' }}>Parco di Montebello · Quattro Castella</p>
 
         <a
-          href="https://www.google.com/maps/dir/?api=1&destination=Parco+di+Montebello%2C+Via+Fosse+Ardeatine+1%2C+42020+Quattro+Castella+RE"
+          href="https://www.google.com/maps/dir/?api=1&destination=44.6118492%2C10.4978321"
           target="_blank"
           rel="noopener noreferrer"
           className="maps-cta"
