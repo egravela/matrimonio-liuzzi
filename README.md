@@ -8,7 +8,7 @@ Gli ospiti inquadrano il QR code sui tavoli, installano la web-app e condividono
 | Rotta | Descrizione |
 |---|---|
 | `/` | Home con i nomi degli sposi, data e pulsanti principali |
-| `/intolleranze` | Modulo intolleranze e preferenze alimentari, una scheda per persona (si compila anche per tutta la famiglia) |
+| `/intolleranze` | Modulo intolleranze e preferenze alimentari, una scheda per persona (si compila anche per tutta la famiglia). A raccolta chiusa è nascosto da home e barra di navigazione, ma resta raggiungibile dall'URL |
 | `/tavoli` | I tavoli del ricevimento, uno per molecola: disegno, spiegazione scientifica e dedica agli ospiti. `/tavoli#ossitocina` apre direttamente quella scheda |
 | `/carica` | Caricamento foto/video (nome ospite + dedica facoltativa) |
 | `/galleria` | Galleria a mosaico con lightbox e aggiornamento in tempo reale |
