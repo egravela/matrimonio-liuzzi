@@ -9,6 +9,7 @@ Gli ospiti inquadrano il QR code sui tavoli, installano la web-app e condividono
 |---|---|
 | `/` | Home con i nomi degli sposi, data e pulsanti principali |
 | `/intolleranze` | Modulo intolleranze e preferenze alimentari, una scheda per persona (si compila anche per tutta la famiglia) |
+| `/tavoli` | I tavoli del ricevimento, uno per molecola: disegno, spiegazione scientifica e dedica agli ospiti. `/tavoli#ossitocina` apre direttamente quella scheda |
 | `/carica` | Caricamento foto/video (nome ospite + dedica facoltativa) |
 | `/galleria` | Galleria a mosaico con lightbox e aggiornamento in tempo reale |
 | `/qr` | QR code del sito, da stampare per i cartoncini dei tavoli |
@@ -25,6 +26,18 @@ e ognuno segnala per sé e per chi viene con lui. Dettagli:
 - le risposte sono leggibili solo dall'email admin (contengono allergie e contatti);
   in `/admin` → *A tavola* ci sono il riepilogo per il catering e l'export CSV
 - la scadenza mostrata agli ospiti è la costante `DEADLINE` in [lib/diet.ts](lib/diet.ts)
+
+## I tavoli
+
+I tavoli non hanno numeri: ognuno porta il nome di una molecola (Ossitocina, Telomerasi, Limonene…)
+con una spiegazione scientifica e una dedica a chi ci siede. I testi stanno in
+[lib/tavoli.ts](lib/tavoli.ts), in ordine alfabetico; per aggiungere o correggere un tavolo basta
+modificare quell'elenco. Il campo `shape` sceglie il tipo di disegno (`anello`, `catena`, `elica`)
+che [components/Molecule.tsx](components/Molecule.tsx) genera in modo deterministico dallo `slug`:
+lo stesso tavolo ha sempre la stessa molecola.
+
+Ogni scheda ha un'ancora (`/tavoli#limonene`): utile per i cartoncini dei tavoli, se si vuole un
+QR che apra direttamente la molecola di quel tavolo.
 
 ## Setup
 

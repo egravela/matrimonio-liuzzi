@@ -1,5 +1,5 @@
-const CACHE = 'et-wedding-v2';
-const PRECACHE = ['/', '/intolleranze', '/carica', '/galleria'];
+const CACHE = 'et-wedding-v3';
+const PRECACHE = ['/', '/intolleranze', '/tavoli', '/carica', '/galleria'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
