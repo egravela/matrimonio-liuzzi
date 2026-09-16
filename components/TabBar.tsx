@@ -25,6 +25,18 @@ const tabs = [
     ),
   },
   {
+    href: '/tavoli',
+    label: 'Tavoli',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <circle cx="12" cy="6" r="2.4" />
+        <circle cx="5.5" cy="17" r="2.4" />
+        <circle cx="18.5" cy="17" r="2.4" />
+        <path d="M10.8 8 6.7 14.8M13.2 8l4.1 6.8M7.9 17h8.2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
     href: '/carica',
     label: 'Carica',
     icon: (
