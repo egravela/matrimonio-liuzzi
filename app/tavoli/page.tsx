@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Floral from '@/components/Floral';
 import { TAVOLI } from '@/lib/tavoli';
-import TavoliList from './TavoliList';
+import TavoliGate from './TavoliGate';
 
 export const metadata: Metadata = {
   title: 'I tavoli — Elena & Tommaso',
@@ -25,17 +25,7 @@ export default function TavoliPage() {
           Una molecola per ogni tavolo
         </p>
 
-        <p className="center tavoli-intro">
-          Niente numeri: ogni tavolo porta il nome di una molecola, scelta pensando a chi ci
-          siederà. Sul segnaposto trovate la vostra: cercatela qui sotto e scoprite perché
-          l&apos;abbiamo dedicata proprio a voi.
-        </p>
-
-        <TavoliList tavoli={TAVOLI} />
-
-        <p className="center" style={{ marginTop: '2rem', fontSize: '0.92rem', color: 'var(--ink-soft)' }}>
-          {TAVOLI.length} tavoli, {TAVOLI.length} molecole, una sola grande famiglia.
-        </p>
+        <TavoliGate tavoli={TAVOLI} />
       </div>
     </main>
   );

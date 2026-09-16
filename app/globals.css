@@ -837,6 +837,42 @@ button {
   color: var(--ink-soft);
 }
 
+/* scheda di attesa: i tavoli sono ancora una sorpresa */
+
+.tavoli-attesa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.8rem;
+  padding: 1.8rem 1.4rem 1.6rem;
+  background: linear-gradient(160deg, #fff 55%, var(--blush));
+  border-color: var(--rose);
+  text-align: center;
+}
+
+.tavoli-attesa p {
+  max-width: 34ch;
+  color: var(--ink-soft);
+}
+
+.tavoli-attesa-glyph {
+  width: 96px;
+  height: 96px;
+}
+
+.tavoli-attesa-title {
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
+}
+
+.tavoli-attesa-count {
+  margin-top: 0.6rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--sage-dark) !important;
+}
+
 .tavoli-finder {
   margin-bottom: 1.3rem;
 }

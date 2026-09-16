@@ -2,6 +2,17 @@
 // spiegazione scientifica e la dedica agli ospiti che ci siedono.
 // Testi degli sposi; l'ordine è alfabetico come nel loro documento.
 
+/**
+ * I tavoli restano una sorpresa fino alla vigilia: venerdì 18 settembre 2026
+ * alle 23 (ora italiana, CEST = UTC+2). Prima di quel momento la pagina non
+ * è raggiungibile dalla home né dalla barra, e chi arriva con il link diretto
+ * trova il conto alla rovescia. Il confronto usa l'orologio del dispositivo.
+ */
+export const REVEAL_AT = new Date('2026-09-18T23:00:00+02:00');
+
+/** Come raccontiamo agli ospiti il momento dell'apertura. */
+export const REVEAL_LABEL = 'venerdì 18 settembre alle 23';
+
 /** Forma del disegno che accompagna la scheda (vedi components/Molecule.tsx). */
 export type MoleculeShape = 'anello' | 'catena' | 'elica';
 

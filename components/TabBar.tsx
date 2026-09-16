@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTavoliReveal } from '@/components/useTavoliReveal';
 
 const tabs = [
   {
@@ -53,10 +54,14 @@ const tabs = [
 
 export default function TabBar() {
   const pathname = usePathname();
+  // I tavoli entrano in barra solo a sorpresa svelata: prima di allora la voce
+  // non c'è, nemmeno per chi apre la pagina con il link diretto.
+  const reveal = useTavoliReveal();
+  const visible = tabs.filter((t) => t.href !== '/tavoli' || reveal === 'aperto');
 
   return (
     <nav className="tabbar">
-      {tabs.map((t) => (
+      {visible.map((t) => (
         <Link key={t.href} href={t.href} className={pathname === t.href ? 'active' : ''}>
           {t.icon}
           {t.label}
