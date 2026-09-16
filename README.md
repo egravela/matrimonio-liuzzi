@@ -9,7 +9,7 @@ Gli ospiti inquadrano il QR code sui tavoli, installano la web-app e condividono
 |---|---|
 | `/` | Home con i nomi degli sposi, data e pulsanti principali |
 | `/intolleranze` | Modulo intolleranze e preferenze alimentari, una scheda per persona (si compila anche per tutta la famiglia). A raccolta chiusa è nascosto da home e barra di navigazione, ma resta raggiungibile dall'URL |
-| `/tavoli` | I tavoli del ricevimento, uno per molecola: disegno, spiegazione scientifica e dedica agli ospiti. `/tavoli#ossitocina` apre direttamente quella scheda |
+| `/tavoli` | I tavoli del ricevimento, uno per molecola: disegno, spiegazione scientifica e dedica agli ospiti. Visibile dalla vigilia (vedi sotto); `/tavoli#ossitocina` apre direttamente quella scheda |
 | `/carica` | Caricamento foto/video (nome ospite + dedica facoltativa) |
 | `/galleria` | Galleria a mosaico con lightbox e aggiornamento in tempo reale |
 | `/qr` | QR code del sito, da stampare per i cartoncini dei tavoli |
@@ -38,6 +38,21 @@ lo stesso tavolo ha sempre la stessa molecola.
 
 Ogni scheda ha un'ancora (`/tavoli#limonene`): utile per i cartoncini dei tavoli, se si vuole un
 QR che apra direttamente la molecola di quel tavolo.
+
+### La sorpresa si apre alla vigilia
+
+Fino a **venerdì 18 settembre 2026 alle 23** (costante `REVEAL_AT` in [lib/tavoli.ts](lib/tavoli.ts))
+i tavoli non compaiono: niente voce in barra, niente richiamo in home, e chi apre `/tavoli` con il
+link diretto trova un conto alla rovescia. Allo scoccare dell'ora la pagina si scopre da sola, senza
+bisogno di ricaricare, per chi ha l'app aperta.
+
+Il confronto avviene sull'orologio del dispositivo: le pagine sono statiche e generate in fase di
+build, quindi il server non può decidere: per lo stesso motivo il primo render è sempre "in attesa"
+e il contenuto giusto compare subito dopo. Un ospite con la data del telefono spostata in avanti
+vedrebbe i tavoli in anticipo.
+
+Gli sposi possono controllare la pagina prima con `/tavoli?anteprima`, che scavalca la barriera e
+mostra un avviso in cima.
 
 ## Setup
 
