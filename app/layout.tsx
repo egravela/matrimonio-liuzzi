@@ -30,7 +30,7 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: 'Elena & Tommaso — 19 settembre 2026',
   description:
-    'Matrimonio di Elena e Tommaso, Parco di Montebello, 19 settembre 2026: segnala le intolleranze alimentari, scopri il tuo tavolo e condividi le tue foto e i tuoi video.',
+    'Matrimonio di Elena e Tommaso, Parco di Montebello, 19 settembre 2026: scopri il tuo tavolo e condividi le tue foto e i tuoi video.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
