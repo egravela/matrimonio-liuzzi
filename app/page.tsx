@@ -2,6 +2,20 @@ import Link from 'next/link';
 import Floral from '@/components/Floral';
 import Molecule from '@/components/Molecule';
 
+/**
+ * Con la sola destinazione il navigatore propone la scorciatoia per il centro di Quattro
+ * Castella e il Castello di Bianello: strada di collina stretta e tortuosa. I waypoint
+ * obbligano il percorso indicato dal Parco (Montecavolo -> Salvarano -> Montebello).
+ */
+const MAPS_DESTINATION = '44.6118492,10.4978321';
+const MAPS_WAYPOINTS = ['Montecavolo, Quattro Castella RE', 'Salvarano, Quattro Castella RE'];
+
+const MAPS_URL =
+  'https://www.google.com/maps/dir/?api=1' +
+  `&destination=${encodeURIComponent(MAPS_DESTINATION)}` +
+  `&waypoints=${encodeURIComponent(MAPS_WAYPOINTS.join('|'))}` +
+  '&travelmode=driving';
+
 export default function Home() {
   return (
     <main className="page">
@@ -27,18 +41,18 @@ export default function Home() {
         </p>
         <p style={{ fontStyle: 'italic', color: 'var(--ink-soft)' }}>Parco di Montebello · Quattro Castella</p>
 
-        <a
-          href="https://www.google.com/maps/dir/?api=1&destination=44.6118492%2C10.4978321"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="maps-cta"
-        >
+        <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="maps-cta">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
             <path d="M12 21s-6.5-5.4-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.6 12 21 12 21z" strokeLinejoin="round" />
             <circle cx="12" cy="10.3" r="2.4" />
           </svg>
           Come arrivare
         </a>
+
+        <p className="maps-note">
+          Si passa da <strong>Montecavolo</strong> e <strong>Salvarano</strong>, la strada consigliata
+          dal Parco. Evitate la scorciatoia dal Castello di Bianello: stretta e tortuosa.
+        </p>
 
         <div className="divider" />
 

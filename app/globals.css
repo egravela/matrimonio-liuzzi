@@ -148,6 +148,19 @@ button {
   color: #c98795;
 }
 
+.maps-note {
+  max-width: 34ch;
+  margin: 0.7rem auto 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.maps-note strong {
+  font-weight: 600;
+  color: var(--rose-deep);
+}
+
 .btn.ghost {
   background: transparent;
   color: var(--sage-dark);
